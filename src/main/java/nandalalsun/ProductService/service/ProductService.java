@@ -64,12 +64,13 @@ public class ProductService {
         }
     }
 
-    public ProductResponse update(ProductRequest productRequest){
+    public ProductResponse update(ProductRequest productRequest, Long id){
         Product newProduct = Product.builder()
                 .name(productRequest.getName())
                 .description(productRequest.getDescription())
                 .price(productRequest.getPrice())
                 .build();
+       newProduct.setId(id);
 
         productDao.save(newProduct);
 

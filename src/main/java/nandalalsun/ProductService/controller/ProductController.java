@@ -37,4 +37,15 @@ public class ProductController {
         productService.delete(id);
         return new ResponseEntity<String>("Record deleted", HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@RequestBody ProductRequest requestBody, @PathVariable Long id){
+        ProductResponse isExist = productService.getProduct(id);
+
+        if(isExist != null){
+            ProductResponse productResponse = productService.update(requestBody, id);
+            return new ResponseEntity<>(productResponse, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("No record found", HttpStatus.NOT_FOUND);
+    }
 }
