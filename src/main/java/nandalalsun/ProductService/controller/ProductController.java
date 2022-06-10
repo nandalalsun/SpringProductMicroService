@@ -30,4 +30,11 @@ public class ProductController {
     public List<ProductResponse> getAllProducts(){
         return productService.getAllProducts();
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        productService.delete(id);
+        return new ResponseEntity<String>("Record deleted", HttpStatus.OK);
+    }
 }
